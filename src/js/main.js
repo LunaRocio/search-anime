@@ -13,18 +13,26 @@ function getDataApi() {
     });
 }
 
+function listenerSeries() {
+  const liSerie = document.querySelectorAll(".js-liSeries");
+  for (const li of liSerie) {
+    li.addEventListener("click", () => console.log(`Click en serie `));
+  }
+}
+
 function renderSeries() {
   let html = "";
   for (const oneResult of animeSeriesList) {
     console.log(oneResult);
-    html += `<li>`;
+    html += `<li class="js-liSeries">`;
     html += `<img
     src=${oneResult.images.jpg.image_url}
     alt=${oneResult.title}
         />`;
     html += `<h2>${oneResult.title}</h2>`;
     html += `</li>`;
-    listSerie.innerHTML = html;
+    listSerie.innerHTML = html; //pinto
+    listenerSeries(); //y escucho
   }
   console.log(html);
 }
