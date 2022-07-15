@@ -10,14 +10,21 @@ fetch("https://api.jikan.moe/v4/anime?q=")
   .then((data) =>{
     animeSeriesList=data.data;
     console.log(animeSeriesList);
-    console.log(animeSeriesList[1].images.jpg.image_url);
-    listSerie.innerHTML= `<li><img
-      src=${animeSeriesList[1].images.jpg.image_url}
-      alt=${animeSeriesList[1].title}
-    />
-    <h2>${animeSeriesList[1].title}</h2>
-  </li>`;
-    console.log(listSerie);
+
+    let html= "";
+    for(const oneResult of animeSeriesList ){
+      console.log(oneResult);
+      html += `<li>`;
+      html += `<img
+      src=${oneResult.images.jpg.image_url}
+      alt=${oneResult.title}
+    />`;
+      html += `<h2>${oneResult.title}</h2>`;
+      html += `</li>`;
+      listSerie.innerHTML = html;
+    }
+
+    console.log(html);
   });
 
 
