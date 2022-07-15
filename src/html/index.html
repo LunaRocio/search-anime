@@ -13,7 +13,31 @@
   </head>
 
   <body>
-    <h2 class="pruebaH2">prueba</h2>
+    <main>
+      <h1 class="title">Buscador de series de Anime</h1>
+      <form action="" method="">
+        <input
+          type="text"
+          name="serie"
+          placeholder="Tu serie favorita de Anime"
+          class="inputSearch js-inputSearh"
+        />
+
+        <input type="submit" value="Buscar" />
+
+        <input type="button" value="Reset" />
+      </form>
+      <section class="searchResult">
+        <article>
+          <img
+            src="https://portadas.sinlib.es/muestraPortadaN.php?ean=9788484496694&ancho=0&alto=256&calidad=70&cliente=582&fichero_no_foto=celeste.jpg"
+            alt="Naruto"
+          />
+          <h2>Naruto</h2>
+        </article>
+      </section>
+    </main>
+
     <!--
       <div class="page">
       <include
@@ -23,7 +47,8 @@
       <include src="./partials/main.html"></include>
       <include src="./partials/footer.html"></include>
     </div>
-    <script src="./assets/js/main.js"></script>
+    
      -->
+    <script src="./assets/js/main.js"></script>
   </body>
 </html>
