@@ -8,10 +8,9 @@
 //@import 'pages/index';
 .lists{
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
+    justify-content: center;
     width: 500px;
-    background-color: aquamarine;
+    background-color: rgb(176, 238, 217);
     &__searchResult{
         background-color: rgb(236, 208, 129);
         width: 50%;
@@ -22,8 +21,3 @@
     }
 }
 
-.favourite{
-    background-color: cornflowerblue;
-    border-radius: 6px;
-    width: 600px;
-}
