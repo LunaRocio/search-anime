@@ -1,30 +1,17 @@
 "use strict";
-
+//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+//Constantes y variables
 const listSerie = document.querySelector(".js-serie");
-const listSerieFav = document.querySelector("js-serieFav");
+console.log(listSerie);
+const buttonSearch = document.querySelector(".js-buttonSearch");
+
+const listSerieFav = document.querySelector(".js-serieFav");
+console.log(listSerieFav);
+
 let animeSeriesList = [];
 let favouriteSeries = [];
 
-// function renderSeriesFav() {
-//   let htmlFav = "";
-//   for (const oneResultFav of favouriteSeries) {
-//     console.log(oneResultFav);
-//     //console.log(animeSeriesList);
-//     htmlFav += `<li class="js-liSeriesFav" id=${oneResultFav.mal_id}>`;
-//     //console.log(oneResult.mal_id);
-//     htmlFav += `<img
-//     src=${oneResultFav.images.jpg.image_url}
-//     alt=${oneResultFav.title}
-//         />`;
-//     htmlFav += `<h2>${oneResultFav.title}</h2>`;
-//     htmlFav += `</li>`;
-//     listSerieFav.innerHTML = htmlFav; //pinto
-//     // listenerSeries(); //y escucho en bucle
-//   }
-//   //console.log(htmlFav);
-// }
-
-function handleClick(ev) {
+function handleClickFav(ev) {
   console.log(ev.currentTarget);
   console.log(ev.currentTarget.id);
 
@@ -50,8 +37,10 @@ function handleClick(ev) {
   console.log(favouriteSeries);
 }
 
-/*  const idFound = animeSeriesList.find(() => animeSeriesList.id === idSelected);
-  console.log(idFound);*/
+buttonSearch.addEventListener("click", (ev) => {
+  ev.preventDefault();
+  getDataApi();
+});
 
 function getDataApi() {
   fetch("https://api.jikan.moe/v4/anime?q=") //al lado del igual voy a tener que llamar una variable que obtendra el input. de js-inputSeacrh
@@ -67,7 +56,7 @@ function getDataApi() {
 function listenerSeries() {
   const liSerie = document.querySelectorAll(".js-liSeries");
   for (const li of liSerie) {
-    li.addEventListener("click", handleClick);
+    li.addEventListener("click", handleClickFav);
   }
 }
 
@@ -75,10 +64,7 @@ function listenerSeries() {
 function renderSeries() {
   let html = "";
   for (const oneResult of animeSeriesList) {
-    //console.log(oneResult);
-    //console.log(animeSeriesList);
     html += `<li class="js-liSeries" id=${oneResult.mal_id}>`;
-    //console.log(oneResult.mal_id);
     html += `<img
     src=${oneResult.images.jpg.image_url}
     alt=${oneResult.title}
@@ -88,7 +74,5 @@ function renderSeries() {
     listSerie.innerHTML = html; //pinto
     listenerSeries(); //y escucho en bucle
   }
-
-  // console.log(html);
 }
-getDataApi();
+// getDataApi();

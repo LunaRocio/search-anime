@@ -9,4 +9,21 @@
 .lists{
     display: flex;
     flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 500px;
+    background-color: aquamarine;
+    &__searchResult{
+        background-color: rgb(236, 208, 129);
+        width: 50%;
+    }
+    &__favResult{
+        background-color: rgb(236, 78, 109);
+        width: 50%;
+    }
+}
+
+.favourite{
+    background-color: cornflowerblue;
+    border-radius: 6px;
+    width: 600px;
 }
