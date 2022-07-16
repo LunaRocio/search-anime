@@ -6,6 +6,7 @@
 //@import 'layout/header';
 //@import 'layout/footer';
 //@import 'pages/index';
-.pruebaH2{
-    color: aqua;
+.lists{
+    display: flex;
+    flex-direction: row-reverse;
 }
