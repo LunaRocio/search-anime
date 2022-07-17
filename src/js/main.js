@@ -6,7 +6,7 @@ const listSerie = document.querySelector(".js-serie");
 console.log(listSerie);
 const buttonSearch = document.querySelector(".js-buttonSearch");
 
-const listSerieFav = document.querySelector(".js-lists");
+const listSerieFav = document.querySelector(".js-listsFav");
 console.log(listSerieFav);
 
 let animeSeriesList = [];
@@ -71,12 +71,33 @@ function handleClickFav(ev) {
 
   if (favouriteFound === -1) {
     favouriteSeries.push(serieFound);
+    renderSeriesFav();
   } else {
     favouriteSeries.splice(favouriteFound, 1);
+    renderSeriesFav();
   }
-
   console.log(serieFound);
   console.log(favouriteSeries);
+}
+
+function renderSeriesFav() {
+  listSerieFav.innerHTML = "";
+  let html = "";
+
+  for (const oneResult of favouriteSeries) {
+    console.log(oneResult.mal_id);
+    html += `<li class="js-liSeriesFav" id=${oneResult.mal_id}>`;
+
+    html += `<img
+    src=${oneResult.images.jpg.image_url}
+    alt=${oneResult.title}
+        />`;
+    html += `<h2>${oneResult.title}</h2>`;
+    html += `</li>`;
+    html += `</ul>`;
+    html += ` </div>`;
+    listSerieFav.innerHTML = html;
+  }
 }
 
 //EVENTOS
