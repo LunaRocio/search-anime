@@ -13,11 +13,13 @@ let animeSeriesList = [];
 let favouriteSeries = [];
 
 //FUNCTIONS
-/* getDataApi:
+/*1 getDataApi:
 fetch: pido los datos de la API, "then" espero una respuesta que convierto en json, "then" guardo los datos en un array .animeSeriesList. y los pinto con renderSeries*/
 
 function getDataApi() {
-  fetch("https://api.jikan.moe/v4/anime?q=") //al lado del "=" voy a tener que llamar una variable que obtendra el input. de js-inputSeacrh
+  const inputSearch = document.querySelector(".js-inputSearh");
+  let inputValue = inputSearch.value;
+  fetch(`https://api.jikan.moe/v4/anime?q=${inputValue}`)
     .then((response) => response.json())
     .then((data) => {
       animeSeriesList = data.data; //el segundo "data" es un elemento del array
@@ -26,7 +28,7 @@ function getDataApi() {
     });
 }
 
-/*renderSeries:
+/* 2 renderSeries:
 Recorro el array .animeSeriesList. con un "for of" y recojo elementos para añadir en "html", con innerHTML selecciono un lugar en el que pintar "html", escucho en bucle con listenerSeries  */
 function renderSeries() {
   let html = "";
@@ -43,7 +45,7 @@ function renderSeries() {
   }
 }
 
-/*listenerSeries:
+/* 3 listenerSeries:
 Ponemos a todos los <li> la misma clase para seleccionarlos/  querySelectorAll me devuelv un array/ recorremos ese array con un bucle/ añadimos un evento escuchador a cada <li>*/
 function listenerSeries() {
   const liSerie = document.querySelectorAll(".js-liSeries");
@@ -52,7 +54,7 @@ function listenerSeries() {
   }
 }
 
-/*handleClickFav:
+/* 4 handleClickFav:
  */
 function handleClickFav(ev) {
   console.log(ev.currentTarget);
@@ -64,8 +66,8 @@ function handleClickFav(ev) {
   const serieFound = animeSeriesList.find(
     (serie) => serie.mal_id === idSelected
   );
-  // (findIndex) me devuelve la posicion del elemento
   const favouriteFound = favouriteSeries.findIndex(
+    // (findIndex) me devuelve la posicion del elemento
     (fav) => fav.mal_id === idSelected
   );
 
@@ -79,7 +81,7 @@ function handleClickFav(ev) {
   console.log(serieFound);
   console.log(favouriteSeries);
 }
-
+// 5
 function renderSeriesFav() {
   listSerieFav.innerHTML = "";
   let html = "";
@@ -101,8 +103,16 @@ function renderSeriesFav() {
 }
 
 //EVENTOS
-//Al esuchar el 'click' en el boton de busqueda nos traemos la API
+// 1 Al esuchar el 'click' en el boton de busqueda nos traemos la API
+
+// inputSearch.addEventListener("keyup", (ev) => {
+//   ev.preventDefault();
+// });
+
+// 1 Al esuchar el 'click' en el boton de busqueda nos traemos la API
+
 buttonSearch.addEventListener("click", (ev) => {
   ev.preventDefault();
+
   getDataApi();
 });
