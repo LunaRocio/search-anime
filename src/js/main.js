@@ -34,10 +34,21 @@ function renderSeries() {
   let html = "";
   for (const oneResult of animeSeriesList) {
     html += `<li class="js-liSeries" id=${oneResult.mal_id}>`;
-    html += `<img
-    src=${oneResult.images.jpg.image_url}
-    alt=${oneResult.title}
+    if (
+      oneResult.images.jpg.image_url ===
+      "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png"
+    ) {
+      html += `<img
+      src='
+      https://via.placeholder.com/210x295/ffffff/666666/?text=TV'
+      alt='image notfound'
+          />`;
+    } else {
+      html += `<img
+      src=${oneResult.images.jpg.image_url}
+      alt=${oneResult.title}
         />`;
+    }
     html += `<h2>${oneResult.title}</h2>`;
     html += `</li>`;
     listSerie.innerHTML = html;
@@ -85,15 +96,25 @@ function handleClickFav(ev) {
 function renderSeriesFav() {
   listSerieFav.innerHTML = "";
   let html = "";
-
   for (const oneResult of favouriteSeries) {
     console.log(oneResult.mal_id);
     html += `<li class="js-liSeriesFav" id=${oneResult.mal_id}>`;
-
-    html += `<img
-    src=${oneResult.images.jpg.image_url}
-    alt=${oneResult.title}
+    if (
+      oneResult.images.jpg.image_url ===
+      "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png"
+    ) {
+      html += `<img
+      src='
+      https://via.placeholder.com/210x295/ffffff/666666/?text=TV'
+      alt='image notfound'
+          />`;
+    } else {
+      html += `<img
+      src=${oneResult.images.jpg.image_url}
+      alt=${oneResult.title}
         />`;
+    }
+
     html += `<h2>${oneResult.title}</h2>`;
     html += `</li>`;
     html += `</ul>`;
@@ -113,6 +134,5 @@ function renderSeriesFav() {
 
 buttonSearch.addEventListener("click", (ev) => {
   ev.preventDefault();
-
   getDataApi();
 });
