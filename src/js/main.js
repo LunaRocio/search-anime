@@ -33,8 +33,9 @@ function getDataApi() {
 Recorro el array .animeSeriesList. con un "for of" y recojo elementos para añadir en "html", con innerHTML selecciono un lugar en el que pintar "html", escucho en bucle con listenerSeries  */
 function renderSeries() {
   let html = "";
+  html += "<h2>Resultado de la busqueda</h2>";
   for (const oneResult of animeSeriesList) {
-    html += `<li class="js-liSeries" id=${oneResult.mal_id}>`;
+    html += `<li style="list-style-type:none" class="js-liSeries" id=${oneResult.mal_id}>`;
     if (
       oneResult.images.jpg.image_url ===
       "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png"
@@ -96,35 +97,40 @@ function handleClickFav(ev) {
 // 5
 function renderSeriesFav() {
   listSerieFav.innerHTML = "";
-  let html = "";
-  html += '<div class="lists__favResult">';
-  html += "<h2>Favoritos</h2>";
-  html += '<ul class="lists__favResult--ul js-listsFav">';
-  for (const oneResult of favouriteSeries) {
-    console.log(oneResult.mal_id);
-    html += `<li class="js-liSeriesFav" id=${oneResult.mal_id}>`;
-    if (
-      oneResult.images.jpg.image_url ===
-      "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png"
-    ) {
-      html += `<img
+  if (favouriteSeries.length === 0) {
+    console.log(favouriteSeries);
+    renderSeries();
+  } else {
+    let html = "";
+    html += '<div class="lists__favResult">';
+    html += "<h2>Favoritos</h2>";
+    html += '<ul class="lists__favResult--ul js-listsFav">';
+    for (const oneResult of favouriteSeries) {
+      console.log(oneResult.mal_id);
+      html += `<li style="list-style-type:none" class="js-liSeriesFav" id=${oneResult.mal_id}>`;
+      if (
+        oneResult.images.jpg.image_url ===
+        "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png"
+      ) {
+        html += `<img
       src='
       https://via.placeholder.com/210x295/ffffff/666666/?text=TV'
       alt='image notfound'
           />`;
-    } else {
-      html += `<img
+      } else {
+        html += `<img
       src=${oneResult.images.jpg.image_url}
       alt=${oneResult.title}
         />`;
-    }
+      }
 
-    html += `<h2>${oneResult.title}</h2>`;
-    html += `</li>`;
+      html += `<h2>${oneResult.title}</h2>`;
+      html += `</li>`;
+    }
+    html += `</ul>`;
+    html += "</div>";
+    listSerieFav.innerHTML += html;
   }
-  html += `</ul>`;
-  html += "</div>";
-  listSerieFav.innerHTML += html;
 }
 
 //EVENTOS

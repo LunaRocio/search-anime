@@ -6,9 +6,10 @@
 //@import 'layout/header';
 //@import 'layout/footer';
 //@import 'pages/index';
+::marker{
+    display: none;
+}
 .lists{
-    
-    background-color: rgb(176, 238, 217);
     &__searchResult{
         background-color: rgb(236, 208, 129);
     }
@@ -24,5 +25,5 @@
 .main{
     display: flex;
     flex-direction: row-reverse;
-    justify-content: space-between;
+    justify-content: left;
 }
