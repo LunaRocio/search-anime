@@ -7,22 +7,22 @@
 //@import 'layout/footer';
 //@import 'pages/index';
 .lists{
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
+    
     background-color: rgb(176, 238, 217);
     &__searchResult{
         background-color: rgb(236, 208, 129);
-        width: 50%;
     }
     &__favResult{      
         
         background-color: rgb(236, 78, 109);
-        width: 50%;
         &--ul{
             display: flex;
             flex-direction: column;
         }
     }
 }
-
+.main{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}

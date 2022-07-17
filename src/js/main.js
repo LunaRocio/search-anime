@@ -6,7 +6,7 @@ const listSerie = document.querySelector(".js-serie");
 console.log(listSerie);
 const buttonSearch = document.querySelector(".js-buttonSearch");
 
-const listSerieFav = document.querySelector(".js-listsFav");
+const listSerieFav = document.querySelector(".js-favList");
 console.log(listSerieFav);
 
 let animeSeriesList = [];
@@ -14,6 +14,7 @@ let favouriteSeries = [];
 
 //FUNCTIONS
 /*1 getDataApi:
+Inluida en el evento click de "buttonSearh
 fetch: pido los datos de la API, "then" espero una respuesta que convierto en json, "then" guardo los datos en un array .animeSeriesList. y los pinto con renderSeries*/
 
 function getDataApi() {
@@ -96,6 +97,9 @@ function handleClickFav(ev) {
 function renderSeriesFav() {
   listSerieFav.innerHTML = "";
   let html = "";
+  html += '<div class="lists__favResult">';
+  html += "<h2>Favoritos</h2>";
+  html += '<ul class="lists__favResult--ul js-listsFav">';
   for (const oneResult of favouriteSeries) {
     console.log(oneResult.mal_id);
     html += `<li class="js-liSeriesFav" id=${oneResult.mal_id}>`;
@@ -117,19 +121,13 @@ function renderSeriesFav() {
 
     html += `<h2>${oneResult.title}</h2>`;
     html += `</li>`;
-    html += `</ul>`;
-    html += ` </div>`;
-    listSerieFav.innerHTML = html;
   }
+  html += `</ul>`;
+  html += "</div>";
+  listSerieFav.innerHTML += html;
 }
 
 //EVENTOS
-// 1 Al esuchar el 'click' en el boton de busqueda nos traemos la API
-
-// inputSearch.addEventListener("keyup", (ev) => {
-//   ev.preventDefault();
-// });
-
 // 1 Al esuchar el 'click' en el boton de busqueda nos traemos la API
 
 buttonSearch.addEventListener("click", (ev) => {
