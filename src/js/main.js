@@ -1,20 +1,17 @@
 "use strict";
-//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 //Constantes y variables
 const listSerie = document.querySelector(".js-serie");
-console.log(listSerie);
 const buttonSearch = document.querySelector(".js-buttonSearch");
 
 const listSerieFav = document.querySelector(".js-favList");
-console.log(listSerieFav);
 
 let animeSeriesList = [];
 let favouriteSeries = [];
 
 //FUNCTIONS
 /*1 getDataApi:
-Inluida en el evento click de "buttonSearh
+Inluida en el evento click de "buttonSearh"
 fetch: pido los datos de la API, "then" espero una respuesta que convierto en json, "then" guardo los datos en un array .animeSeriesList. y los pinto con renderSeries*/
 
 function getDataApi() {
@@ -68,17 +65,18 @@ function listenerSeries() {
 }
 
 /* 4 handleClickFav:
+Atraves de"currentTarget.id" conseguimos esa propiedad"id" del elemento clickado/ serieFound nos encuentra(find) el elemento completo del "id" clickado/ favouriteFound verifico si el "id" clickado se encuentra en .favouriteSeries./ si favouriteFound no se encuentra en el array, su posicion sera -1,por lo que empujamos(push) serieFound al array y pintamos el nuevo listado , y si ya se encuentra en .favouriteSeries. la plegamos(splice).
  */
 function handleClickFav(ev) {
+  ev.preventDefault();
   console.log(ev.currentTarget);
   console.log(ev.currentTarget.id);
-
-  /*Con currentTarget obtenemos el Id del elemento clickado*/
   const idSelected = parseInt(ev.currentTarget.id);
 
   const serieFound = animeSeriesList.find(
     (serie) => serie.mal_id === idSelected
   );
+
   const favouriteFound = favouriteSeries.findIndex(
     // (findIndex) me devuelve la posicion del elemento
     (fav) => fav.mal_id === idSelected
@@ -94,13 +92,16 @@ function handleClickFav(ev) {
   console.log(serieFound);
   console.log(favouriteSeries);
 }
-// 5
+/* 5 renderSeriesFav
+Cuando .favouriteSeries. esta vacio solo vemos el resultado de la busqueda y si no, pinta el array en el innerHTML/el bucle funciona igual que en renderSeries*/
 function renderSeriesFav() {
+  let classFavourite = "";
   listSerieFav.innerHTML = "";
   if (favouriteSeries.length === 0) {
     console.log(favouriteSeries);
     renderSeries();
   } else {
+    classFavourite = "favouriteLi";
     let html = "";
     html += '<div class="lists__favResult">';
     html += "<h2>Favoritos</h2>";
@@ -124,7 +125,7 @@ function renderSeriesFav() {
         />`;
       }
 
-      html += `<h2>${oneResult.title}</h2>`;
+      html += `<h2 class="${classFavourite}">${oneResult.title}</h2>`;
       html += `</li>`;
     }
     html += `</ul>`;
@@ -135,7 +136,6 @@ function renderSeriesFav() {
 
 //EVENTOS
 // 1 Al esuchar el 'click' en el boton de busqueda nos traemos la API
-
 buttonSearch.addEventListener("click", (ev) => {
   ev.preventDefault();
   getDataApi();
