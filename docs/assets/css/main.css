@@ -1,1 +1,1 @@
-.lists{display:flex;flex-direction:row-reverse;justify-content:space-between;background-color:#b0eed9}.lists__searchResult{background-color:#ecd081;width:50%}.lists__favResult{background-color:#ec4e6d;width:50%}.lists__favResult--ul{display:flex;flex-direction:column}
+::marker{display:none}.lists__searchResult{background-color:#ecd081}.lists__favResult{background-color:#ec4e6d}.lists__favResult--ul{display:flex;flex-direction:column}.main{display:flex;flex-direction:row-reverse;justify-content:left}.favouriteLi{color:#7be6e6}

@@ -84,6 +84,7 @@ function handleClickFav(ev) {
 
   if (favouriteFound === -1) {
     favouriteSeries.push(serieFound);
+    //favLocalStorage();
     renderSeriesFav();
   } else {
     favouriteSeries.splice(favouriteFound, 1);
@@ -93,7 +94,7 @@ function handleClickFav(ev) {
   console.log(favouriteSeries);
 }
 /* 5 renderSeriesFav
-Cuando .favouriteSeries. esta vacio solo vemos el resultado de la busqueda y si no, pinta el array en el innerHTML/el bucle funciona igual que en renderSeries*/
+Cuando .favouriteSeries. esta vacio solo vemos el resultado de la busqueda y si no, añade un valor a classFavourite y pinta el array en el innerHTML/el bucle funciona igual que en renderSeries*/
 function renderSeriesFav() {
   let classFavourite = "";
   listSerieFav.innerHTML = "";
@@ -133,6 +134,12 @@ function renderSeriesFav() {
     listSerieFav.innerHTML += html;
   }
 }
+// function favLocalStorage() {
+//   localStorage.setItem("favouriteSeries", JSON.stringify(favouriteSeries));
+
+//   const savedFavSeris = JSON.parse(localStorage.getItem("favouriteSeries"));
+//   console.log(savedFavSeris);
+// }
 
 //EVENTOS
 // 1 Al esuchar el 'click' en el boton de busqueda nos traemos la API

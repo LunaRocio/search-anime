@@ -13,7 +13,7 @@
   </head>
 
   <body>
-    <main>
+    <header>
       <h1 class="title">Buscador de series de Anime</h1>
       <form action="" method="get">
         <input
@@ -26,8 +26,10 @@
         <input class="js-buttonSearch" type="submit" value="Buscar" />
         <input type="button" value="Reset" />
       </form>
+    </header>
+    <main class="main">
       <section class="js-lists lists">
-        <div class="lists__searchResult">
+        <div class="lists__searchResult js-listsFav">
           <ul class="js-serie"></ul>
           <!-- 
                   <li>
@@ -37,11 +39,14 @@
                     />
                     <h2>Naruto</h2>
                   </li>-->
-        </div>
+        <!-- </div>
         <div class="lists__favResult">
           <h2>Favoritos</h2>
           <ul class="lists__favResult--ul js-listsFav"></ul>
-        </div>
+        </div> -->
+      </section>
+      <section class="js-favList lists">
+        
       </section>
     </main>
 
