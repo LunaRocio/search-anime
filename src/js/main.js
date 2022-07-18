@@ -6,6 +6,7 @@ const buttonSearch = document.querySelector(".js-buttonSearch");
 
 const listSerieFav = document.querySelector(".js-favList");
 
+const buttonReset = document.querySelector(".js-buttonReset");
 let animeSeriesList = [];
 let favouriteSeries = [];
 
@@ -163,42 +164,17 @@ if (favLocalStorage === null) {
 }
 console.log(localStorage);
 
-// localStorage.setItem("localFavList", "favouriteSeriesLocal");
-// const favouriteSeriesLocal = JSON.stringify(favouriteSeries);
-// const valorLocalStorage = JSON.parse(localStorage.getItem("favouriteSeries"));
-// console.log(valorLocalStorage);
-
-// function favLocalStorage() {
-//   localStorage.setItem("favouriteSeries", JSON.stringify(favouriteSeries));
-
-//   const savedFavSeris = JSON.parse(localStorage.getItem("favouriteSeries"));
-//   console.log(savedFavSeris);
-// }
-// console.log(localStorage);
-// const savedTask = JSON.parse(localStorage.getItem("favouriteSeries"));
-// console.log(savedTask);
-
-// if (localStorage.length === 0) {
-//   renderSeries();
-// } else {
-//   renderSeriesFav();
-// }
-
-// function onLocalStorage() {
-//   localStorage.setItem("favouriteSeries", JSON.stringify(data));
-
-//   const dataLocalStorage = JSON.parse(localStorage.getItem("data"));
-//   console.log(dataLocalStorage);
-//   if (dataLocalStorage === null) {
-//   } else {
-//     favouriteSeries = dataLocalStorage;
-//     renderSeriesFav();
-//   }
-// }
-
 //EVENTOS
 // 1 Al esuchar el 'click' en el boton de busqueda nos traemos la API
 buttonSearch.addEventListener("click", (ev) => {
   ev.preventDefault();
   getDataApi();
 });
+
+function handleClickReset(ev) {
+  ev.preventDefault();
+  localStorage.removeItem("localFavList2");
+  favouriteSeries = [];
+  renderSeriesFav();
+}
+buttonReset.addEventListener("click", handleClickReset);
