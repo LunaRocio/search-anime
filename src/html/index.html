@@ -21,7 +21,7 @@
     <div class="circle small shade5"></div>
     <header class="header">
       <h1 class="header__title">Buscador de series de Anime</h1>
-      <form action="" method="get">
+      <form class="form" action="" method="get">
         <input
           type="text"
           name="serie"
@@ -34,41 +34,17 @@
           type="submit"
           value="Buscar"
         />
-        <input class="header__buttonReset" type="button" value="Reset" />
+        <input
+          class="header__buttonReset js-buttonReset"
+          type="button"
+          value="Reset"
+        />
       </form>
     </header>
     <main class="main">
-      <section class="js-lists lists">
-        <!-- <div class="lists__searchResult js-listsFav">
-          <ul class="js-serie lists__searchResult--ul"></ul> -->
-        <!-- 
-                  <li>
-                    <img
-                      src="https://portadas.sinlib.es/muestraPortadaN.php?ean=9788484496694&ancho=0&alto=256&calidad=70&cliente=582&fichero_no_foto=celeste.jpg"
-                      alt="Naruto"
-                    />
-                    <h2>Naruto</h2>
-                  </li>-->
-        <!-- </div>
-        <div class="lists__favResult">
-          <h2>Favoritos</h2>
-          <ul class="lists__favResult--ul js-listsFav"></ul>
-        </div> -->
-      </section>
+      <section class="js-lists lists"></section>
       <section class="js-favList lists"></section>
     </main>
-
-    <!--
-      <div class="page">
-      <include
-        src="./partials/header.html"
-        title="Bienvenidos a Adalab"
-      ></include>
-      <include src="./partials/main.html"></include>
-      <include src="./partials/footer.html"></include>
-    </div>
-    
-     -->
     <script src="./assets/js/main.js"></script>
   </body>
 </html>
