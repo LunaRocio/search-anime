@@ -7,6 +7,7 @@ const buttonSearch = document.querySelector(".js-buttonSearch");
 const listSerieFav = document.querySelector(".js-favList");
 
 const buttonReset = document.querySelector(".js-buttonReset");
+
 let animeSeriesList = [];
 let favouriteSeries = [];
 
@@ -96,7 +97,6 @@ function handleClickFav(ev) {
   );
   if (favouriteFound === -1) {
     favouriteSeries.push(serieFound);
-    // localStorage.setItem("localFavList2", JSON.stringify(favouriteSeries));
     console.log(localStorage);
     renderSeriesFav();
     renderSeries();
@@ -154,15 +154,18 @@ function renderSeriesFav() {
     listSerieFav.innerHTML += html;
   }
 }
-
-const favLocalStorage = JSON.parse(localStorage.getItem("localFavList2"));
-if (favLocalStorage === null) {
-  console.log("Nunca nos habias visitado");
-} else {
-  favouriteSeries = favLocalStorage;
-  renderSeriesFav();
+/*6*/
+function getFavLocalStorage() {
+  const favLocalStorage = JSON.parse(localStorage.getItem("localFavList2"));
+  if (favLocalStorage === null) {
+    console.log("Nunca nos habias visitado");
+  } else {
+    favouriteSeries = favLocalStorage;
+    renderSeriesFav();
+  }
+  console.log(localStorage);
 }
-console.log(localStorage);
+getFavLocalStorage();
 
 //EVENTOS
 // 1 Al esuchar el 'click' en el boton de busqueda nos traemos la API
@@ -174,7 +177,8 @@ buttonSearch.addEventListener("click", (ev) => {
 function handleClickReset(ev) {
   ev.preventDefault();
   localStorage.removeItem("localFavList2");
-  favouriteSeries = [];
-  renderSeriesFav();
+  // listenerSeries();
+  // renderSeries();
+  // renderSeriesFav();
 }
 buttonReset.addEventListener("click", handleClickReset);
