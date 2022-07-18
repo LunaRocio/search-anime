@@ -1,7 +1,7 @@
 "use strict";
 
 //Constantes y variables
-const listSerie = document.querySelector(".js-serie");
+const listSerie = document.querySelector(".js-lists");
 const buttonSearch = document.querySelector(".js-buttonSearch");
 
 const listSerieFav = document.querySelector(".js-favList");
@@ -30,14 +30,16 @@ function getDataApi() {
 Recorro el array .animeSeriesList. con un "for of" y recojo elementos para añadir en "html", con innerHTML selecciono un lugar en el que pintar "html", escucho en bucle con listenerSeries  */
 function renderSeries() {
   let html = "";
-  html += "<h2>Resultado de la busqueda</h2>";
+  html += `<div class="lists__searchResult ">`;
+  html += `<h2 class="lists__searchResult--h2">Resultado de la busqueda</h2>`;
+  html += `<ul class="js-serie lists__searchResult--ul">`;
   for (const oneResult of animeSeriesList) {
-    html += `<li style="list-style-type:none" class="js-liSeries" id=${oneResult.mal_id}>`;
+    html += `<li style="list-style-type:none" class="js-liSeries liSeries" id=${oneResult.mal_id}>`;
     if (
       oneResult.images.jpg.image_url ===
       "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png"
     ) {
-      html += `<img
+      html += `<img class="liSeries__img"
       src='
       https://via.placeholder.com/210x295/ffffff/666666/?text=TV'
       alt='image notfound'
@@ -48,11 +50,13 @@ function renderSeries() {
       alt=${oneResult.title}
         />`;
     }
-    html += `<h2>${oneResult.title}</h2>`;
+    html += `<h3 class="liSeries__title">${oneResult.title}</h3>`;
     html += `</li>`;
     listSerie.innerHTML = html;
     listenerSeries();
   }
+  html += `</ul>`;
+  html += `</div>`;
 }
 
 /* 3 listenerSeries:
@@ -81,15 +85,17 @@ function handleClickFav(ev) {
     // (findIndex) me devuelve la posicion del elemento
     (fav) => fav.mal_id === idSelected
   );
-
   if (favouriteFound === -1) {
     favouriteSeries.push(serieFound);
-    //favLocalStorage();
+    // localStorage.setItem("localFavList2", JSON.stringify(favouriteSeries));
+    console.log(localStorage);
     renderSeriesFav();
   } else {
     favouriteSeries.splice(favouriteFound, 1);
+
     renderSeriesFav();
   }
+  localStorage.setItem("localFavList2", JSON.stringify(favouriteSeries));
   console.log(serieFound);
   console.log(favouriteSeries);
 }
@@ -105,28 +111,30 @@ function renderSeriesFav() {
     classFavourite = "favouriteLi";
     let html = "";
     html += '<div class="lists__favResult">';
-    html += "<h2>Favoritos</h2>";
+    html += `<h2 class="${classFavourite} lists__favResult--h2"> Favoritos </h2>`;
     html += '<ul class="lists__favResult--ul js-listsFav">';
     for (const oneResult of favouriteSeries) {
       console.log(oneResult.mal_id);
-      html += `<li style="list-style-type:none" class="js-liSeriesFav" id=${oneResult.mal_id}>`;
+      html += `<li style="list-style-type:none" class="js-liSeriesFav liSeriesFav" id=${oneResult.mal_id}>`;
       if (
         oneResult.images.jpg.image_url ===
         "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png"
       ) {
         html += `<img
-      src='
-      https://via.placeholder.com/210x295/ffffff/666666/?text=TV'
-      alt='image notfound'
-          />`;
+        class="${classFavourite} liSeriesFav__img"
+        src='
+        https://via.placeholder.com/210x295/ffffff/666666/?text=TV'
+        alt='image notfound'
+            />`;
       } else {
         html += `<img
-      src=${oneResult.images.jpg.image_url}
-      alt=${oneResult.title}
-        />`;
+        class="${classFavourite} liSeriesFav__img"
+        src=${oneResult.images.jpg.image_url}
+        alt=${oneResult.title}
+          />`;
       }
 
-      html += `<h2 class="${classFavourite}">${oneResult.title}</h2>`;
+      html += `<h3 class="${classFavourite} liSeriesFav__title">${oneResult.title}</h3>`;
       html += `</li>`;
     }
     html += `</ul>`;
@@ -134,11 +142,47 @@ function renderSeriesFav() {
     listSerieFav.innerHTML += html;
   }
 }
+
+const favLocalStorage = JSON.parse(localStorage.getItem("localFavList2"));
+if (favLocalStorage === null) {
+  console.log("Nunca nos habias visitado");
+} else {
+  favouriteSeries = favLocalStorage;
+  renderSeriesFav();
+}
+console.log(localStorage);
+
+// localStorage.setItem("localFavList", "favouriteSeriesLocal");
+// const favouriteSeriesLocal = JSON.stringify(favouriteSeries);
+// const valorLocalStorage = JSON.parse(localStorage.getItem("favouriteSeries"));
+// console.log(valorLocalStorage);
+
 // function favLocalStorage() {
 //   localStorage.setItem("favouriteSeries", JSON.stringify(favouriteSeries));
 
 //   const savedFavSeris = JSON.parse(localStorage.getItem("favouriteSeries"));
 //   console.log(savedFavSeris);
+// }
+// console.log(localStorage);
+// const savedTask = JSON.parse(localStorage.getItem("favouriteSeries"));
+// console.log(savedTask);
+
+// if (localStorage.length === 0) {
+//   renderSeries();
+// } else {
+//   renderSeriesFav();
+// }
+
+// function onLocalStorage() {
+//   localStorage.setItem("favouriteSeries", JSON.stringify(data));
+
+//   const dataLocalStorage = JSON.parse(localStorage.getItem("data"));
+//   console.log(dataLocalStorage);
+//   if (dataLocalStorage === null) {
+//   } else {
+//     favouriteSeries = dataLocalStorage;
+//     renderSeriesFav();
+//   }
 // }
 
 //EVENTOS
