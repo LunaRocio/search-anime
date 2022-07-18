@@ -30,11 +30,24 @@ function getDataApi() {
 Recorro el array .animeSeriesList. con un "for of" y recojo elementos para añadir en "html", con innerHTML selecciono un lugar en el que pintar "html", escucho en bucle con listenerSeries  */
 function renderSeries() {
   let html = "";
+
   html += `<div class="lists__searchResult ">`;
   html += `<h2 class="lists__searchResult--h2">Resultado de la busqueda</h2>`;
   html += `<ul class="js-serie lists__searchResult--ul">`;
   for (const oneResult of animeSeriesList) {
-    html += `<li style="list-style-type:none" class="js-liSeries liSeries" id=${oneResult.mal_id}>`;
+    let idFound = parseInt(oneResult.mal_id);
+    const serieFound = favouriteSeries.find(
+      (serie) => serie.mal_id === idFound
+    );
+
+    console.log(serieFound);
+
+    if (serieFound) {
+      html += `<li style="list-style-type:none" class="js-liSeries liSeries classList2" id=${oneResult.mal_id}>`;
+    } else {
+      html += `<li style="list-style-type:none" class="js-liSeries liSeries" id=${oneResult.mal_id}>`;
+    }
+
     if (
       oneResult.images.jpg.image_url ===
       "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png"
@@ -75,8 +88,8 @@ function handleClickFav(ev) {
   ev.preventDefault();
   console.log(ev.currentTarget);
   console.log(ev.currentTarget.id);
-  const idSelected = parseInt(ev.currentTarget.id);
 
+  const idSelected = parseInt(ev.currentTarget.id);
   const serieFound = animeSeriesList.find(
     (serie) => serie.mal_id === idSelected
   );
@@ -90,12 +103,15 @@ function handleClickFav(ev) {
     // localStorage.setItem("localFavList2", JSON.stringify(favouriteSeries));
     console.log(localStorage);
     renderSeriesFav();
+    renderSeries();
   } else {
     favouriteSeries.splice(favouriteFound, 1);
 
     renderSeriesFav();
+    renderSeries();
   }
   localStorage.setItem("localFavList2", JSON.stringify(favouriteSeries));
+
   console.log(serieFound);
   console.log(favouriteSeries);
 }
@@ -103,12 +119,12 @@ function handleClickFav(ev) {
 Cuando .favouriteSeries. esta vacio solo vemos el resultado de la busqueda y si no, añade un valor a classFavourite y pinta el array en el innerHTML/el bucle funciona igual que en renderSeries*/
 function renderSeriesFav() {
   let classFavourite = "";
+
   listSerieFav.innerHTML = "";
   if (favouriteSeries.length === 0) {
     console.log(favouriteSeries);
     renderSeries();
   } else {
-    classFavourite = "favouriteLi";
     let html = "";
     html += '<div class="lists__favResult">';
     html += `<h2 class="${classFavourite} lists__favResult--h2"> Favoritos </h2>`;
