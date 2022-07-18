@@ -1,18 +1,29 @@
-//@import 'core/variables';
 @import 'core/reset';
-//@import 'components/code';
-//@import 'components/links';
-//@import 'layout/page';
-@import 'layout/mainsection';
-//@import 'layout/footer';
+@import 'core/variables';
 //@import 'pages/index';
+//@import 'components/code';
+//@import 'layout/footer';
+//@import 'layout/header';
+@import 'layout/mainsection';
+
 *{
   font-family: 'Shadows Into Light', ;  
 }
+
+::placeholder {
+    color:#EFEFEF;
+    font-size: x-large;
+    font-weight: bold;
+    background-color: $color_main;
+    border-radius: 1cm;
+    
+}
+
+//animated background
 .mydiv {
-    background: linear-gradient(150deg, #dd9ff5,  #ce9ff5, #8a9ceb);
+    background: linear-gradient(150deg, #deb0f0,  #ce9ff5, #8a9ceb);
     background-size: 3000% 3000%;
-    animation: BgGradient 30s ease infinite;
+    animation: BgGradient 25s ease infinite;
 }
 
 @keyframes BgGradient {

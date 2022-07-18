@@ -30,7 +30,6 @@ function getDataApi() {
 Recorro el array .animeSeriesList. con un "for of" y recojo elementos para añadir en "html", con innerHTML selecciono un lugar en el que pintar "html", escucho en bucle con listenerSeries  */
 function renderSeries() {
   let html = "";
-
   html += `<div class="lists__searchResult ">`;
   html += `<h2 class="lists__searchResult--h2">Resultado de la busqueda</h2>`;
   html += `<ul class="js-serie lists__searchResult--ul">`;
@@ -39,15 +38,11 @@ function renderSeries() {
     const serieFound = favouriteSeries.find(
       (serie) => serie.mal_id === idFound
     );
-
-    console.log(serieFound);
-
     if (serieFound) {
       html += `<li style="list-style-type:none" class="js-liSeries liSeries classList2" id=${oneResult.mal_id}>`;
     } else {
       html += `<li style="list-style-type:none" class="js-liSeries liSeries" id=${oneResult.mal_id}>`;
     }
-
     if (
       oneResult.images.jpg.image_url ===
       "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png"
@@ -58,7 +53,7 @@ function renderSeries() {
       alt='image notfound'
           />`;
     } else {
-      html += `<img
+      html += `<img class="liSeries__img"
       src=${oneResult.images.jpg.image_url}
       alt=${oneResult.title}
         />`;
