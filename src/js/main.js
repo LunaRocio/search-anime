@@ -177,8 +177,7 @@ buttonSearch.addEventListener("click", (ev) => {
 function handleClickReset(ev) {
   ev.preventDefault();
   localStorage.removeItem("localFavList2");
-  // listenerSeries();
-  // renderSeries();
-  // renderSeriesFav();
+  favouriteSeries = [];
+  renderSeriesFav();
 }
 buttonReset.addEventListener("click", handleClickReset);
