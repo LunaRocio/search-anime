@@ -29,21 +29,25 @@ function getDataApi() {
 }
 
 /* 2 renderSeries:
-Recorro el array .animeSeriesList. con un "for of" y recojo elementos para añadir en "html", con innerHTML selecciono un lugar en el que pintar "html", escucho en bucle con listenerSeries  */
+Recorro el array .animeSeriesList. con un "for of" y recojo elementos para añadir en "html", con innerHTML selecciono un lugar en el que pintar "html", escucho en bucle con listenerSeries /le añado una clase para marcar que está en .favouriteSeries. */
 function renderSeries() {
+  let favTick = "";
   let html = "";
   html += `<div class="lists__searchResult ">`;
   html += `<h2 class="lists__searchResult--h2">Resultado de la busqueda</h2>`;
   html += `<ul class="js-serie lists__searchResult--ul">`;
   for (const oneResult of animeSeriesList) {
     let idFound = parseInt(oneResult.mal_id);
-    const serieFound = favouriteSeries.find(
+
+    const serieSelectedFound = favouriteSeries.find(
       (serie) => serie.mal_id === idFound
     );
-    if (serieFound) {
-      html += `<li style="list-style-type:none" class="js-liSeries liSeries classList2" id=${oneResult.mal_id}>`;
+
+    if (serieSelectedFound) {
+      favTick = "classList2";
+      html += `<li style="list-style-type:none" class="js-liSeries liSeries ${favTick}" id=${oneResult.mal_id}>`;
     } else {
-      html += `<li style="list-style-type:none" class="js-liSeries liSeries" id=${oneResult.mal_id}>`;
+      html += `<li style="list-style-type:none" class="js-liSeries liSeries " id=${oneResult.mal_id}>`;
     }
     if (
       oneResult.images.jpg.image_url ===
@@ -79,7 +83,7 @@ function listenerSeries() {
 }
 
 /* 4 handleClickFav:
-Atraves de"currentTarget.id" conseguimos esa propiedad"id" del elemento clickado/ serieFound nos encuentra(find) el elemento completo del "id" clickado/ favouriteFound verifico si el "id" clickado se encuentra en .favouriteSeries./ si favouriteFound no se encuentra en el array, su posicion sera -1,por lo que empujamos(push) serieFound al array y pintamos el nuevo listado , y si ya se encuentra en .favouriteSeries. la plegamos(splice).
+Atraves de"currentTarget.id" conseguimos esa propiedad"id" del elemento clickado/ serieFound nos encuentra(find) el elemento completo del "id" clickado/ favouriteFound verifico si el "id" clickado se encuentra en .favouriteSeries./ si favouriteFound no se encuentra en el array, su posicion sera -1,por lo que empujamos(push) serieFound al array y pintamos el nuevo listado , y si ya se encuentra en .favouriteSeries. la plegamos(splice).//En este momento que creo el array creo la variable en el local storage
  */
 function handleClickFav(ev) {
   ev.preventDefault();
@@ -90,14 +94,13 @@ function handleClickFav(ev) {
   const serieFound = animeSeriesList.find(
     (serie) => serie.mal_id === idSelected
   );
-
+  // (findIndex) me devuelve la posicion del elemento
   const favouriteFound = favouriteSeries.findIndex(
-    // (findIndex) me devuelve la posicion del elemento
     (fav) => fav.mal_id === idSelected
   );
+
   if (favouriteFound === -1) {
     favouriteSeries.push(serieFound);
-    console.log(localStorage);
     renderSeriesFav();
     renderSeries();
   } else {
@@ -106,10 +109,8 @@ function handleClickFav(ev) {
     renderSeriesFav();
     renderSeries();
   }
-  localStorage.setItem("localFavList2", JSON.stringify(favouriteSeries));
 
-  console.log(serieFound);
-  console.log(favouriteSeries);
+  localStorage.setItem("localFavList2", JSON.stringify(favouriteSeries));
 }
 /* 5 renderSeriesFav
 Cuando .favouriteSeries. esta vacio solo vemos el resultado de la busqueda y si no, añade un valor a classFavourite y pinta el array en el innerHTML/el bucle funciona igual que en renderSeries*/
@@ -154,11 +155,13 @@ function renderSeriesFav() {
     listSerieFav.innerHTML += html;
   }
 }
-/*6*/
+/*6 getFavLocalStorage
+Guardo mi array de favoritos en el local storage localFavList2
+ */
 function getFavLocalStorage() {
   const favLocalStorage = JSON.parse(localStorage.getItem("localFavList2"));
   if (favLocalStorage === null) {
-    console.log("Nunca nos habias visitado");
+    console.log("Bienvenido! ¿Es tu primera vez?");
   } else {
     favouriteSeries = favLocalStorage;
     renderSeriesFav();
@@ -167,6 +170,14 @@ function getFavLocalStorage() {
 }
 getFavLocalStorage();
 
+/*7 Al pulsar buttonReset eliminamos la variable creada en el local storage/vaciamos nuestro array de series favorita/y pintamos de nuevo para que se apliquen los cambios*/
+function handleClickReset(ev) {
+  ev.preventDefault();
+  localStorage.removeItem("localFavList2");
+  favouriteSeries = [];
+  renderSeriesFav();
+}
+
 //EVENTOS
 // 1 Al esuchar el 'click' en el boton de busqueda nos traemos la API
 buttonSearch.addEventListener("click", (ev) => {
@@ -174,10 +185,5 @@ buttonSearch.addEventListener("click", (ev) => {
   getDataApi();
 });
 
-function handleClickReset(ev) {
-  ev.preventDefault();
-  localStorage.removeItem("localFavList2");
-  favouriteSeries = [];
-  renderSeriesFav();
-}
+//2 Al esuchar el 'click' en el boton de reset ejecutamos la funcion manejadora
 buttonReset.addEventListener("click", handleClickReset);

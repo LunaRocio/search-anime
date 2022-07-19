@@ -51,7 +51,11 @@
     }
 
 
-
+.main{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    }
 
 
 .lists{
@@ -106,15 +110,10 @@ padding-left: 10vh;
 }
 }
 }
-.main{
-display: flex;
-flex-direction: row-reverse;
-justify-content: center;
-}
 
-.favouriteLi{
-color: rgb(90, 23, 129);
-}
+
+
+
 
 .classList2{
 background-color:$shadow_bg ;
