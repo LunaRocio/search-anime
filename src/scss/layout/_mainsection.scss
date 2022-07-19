@@ -64,9 +64,11 @@ display: flex;
 justify-content: center;
 
 
+
+
 &__searchResult{
 color: rgb(209, 74, 243);
-max-width: 40vw; 
+min-width: 40vw; 
 height: 100vh;
 flex-wrap: nowrap;
 padding-right: 10vh;
@@ -83,10 +85,10 @@ font-size: xx-large;
 color:$color_text_list;
 }
 }
+
+
 &__favResult{ 
-
-
-max-width: 40vw; 
+min-width: 30vw; 
 height: 100vh;
 flex-wrap: nowrap;    
 padding-left: 10vh;
@@ -121,19 +123,36 @@ border-radius: 3cm;
 }
 
 .liSeriesFav{
-    cursor: pointer;
     text-align: center;
     background-color: $shadow_bg ;
     border-radius: 3cm;
+    display: flex;
+    align-items: flex-end;
     &__img{
-    width: 140px;
-    height: 240px;
+    width: 110px;
+    height: 140px;
     border-radius: 5%;
     }
 
     &__title{
     width: 140px;
     color:$color_text_list;
+    }
+    &__buttonFav{
+    color:$color_button;
+    border: 2px solid $color_main;
+    border-radius: 10%;
+    padding: 0 4px 0 4px;
+    font-size: large;
+    font-weight: bolder;
+    text-align: center;
+    
+        cursor: pointer;
+
+    }
+    &__favouriteDiv{
+        text-align: left;
+        
     }
 }
 

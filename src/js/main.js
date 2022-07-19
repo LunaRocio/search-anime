@@ -34,7 +34,7 @@ function renderSeries() {
   let favTick = "";
   let html = "";
   html += `<div class="lists__searchResult ">`;
-  html += `<h2 class="lists__searchResult--h2">Resultado de la busqueda</h2>`;
+  html += `<h2 class="lists__searchResult--h2">¡Animes encontrados!</h2>`;
   html += `<ul class="js-serie lists__searchResult--ul">`;
   for (const oneResult of animeSeriesList) {
     let idFound = parseInt(oneResult.mal_id);
@@ -123,7 +123,7 @@ function renderSeriesFav() {
   } else {
     let html = "";
     html += '<div class="lists__favResult">';
-    html += `<h2 class="${classFavourite} lists__favResult--h2"> Favoritos </h2>`;
+    html += `<h2 class="${classFavourite} lists__favResult--h2"> ¡Tus favoritos! </h2>`;
     html += '<ul class="lists__favResult--ul js-listsFav">';
     for (const oneResult of favouriteSeries) {
       console.log(oneResult.mal_id);
@@ -132,7 +132,7 @@ function renderSeriesFav() {
         oneResult.images.jpg.image_url ===
         "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png"
       ) {
-        html += `<input  class="buttonFav js-buttonFav" type="button" value="X" id=${oneResult.mal_id}>
+        html += `
         <img
         class="${classFavourite} liSeriesFav__img"
         src='
@@ -140,7 +140,7 @@ function renderSeriesFav() {
         alt='image notfound'
             />`;
       } else {
-        html += `<input class="buttonFav js-buttonFav" type="button" value="X" id=${oneResult.mal_id}>
+        html += `
         <img
         
         class="${classFavourite} liSeriesFav__img"
@@ -149,7 +149,7 @@ function renderSeriesFav() {
           />`;
       }
 
-      html += `<h3 class="${classFavourite} liSeriesFav__title">${oneResult.title} </h3>`;
+      html += `<div class="liSeriesFav__favouriteDiv"><h3 class="${classFavourite} liSeriesFav__title">${oneResult.title} </h3><input class="liSeriesFav__buttonFav js-buttonFav" type="button" value="X" id=${oneResult.mal_id}> </div>`;
 
       html += `</li>`;
     }
