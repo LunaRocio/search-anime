@@ -87,7 +87,6 @@ Atraves de"currentTarget.id" conseguimos esa propiedad"id" del elemento clickado
  */
 function handleClickFav(ev) {
   ev.preventDefault();
-  console.log(ev.currentTarget);
   console.log(ev.currentTarget.id);
 
   const idSelected = parseInt(ev.currentTarget.id);
@@ -113,7 +112,7 @@ function handleClickFav(ev) {
   localStorage.setItem("localFavList2", JSON.stringify(favouriteSeries));
 }
 /* 5 renderSeriesFav
-Cuando .favouriteSeries. esta vacio solo vemos el resultado de la busqueda y si no, añade un valor a classFavourite y pinta el array en el innerHTML/el bucle funciona igual que en renderSeries*/
+Cuando .favouriteSeries. esta vacio solo vemos el resultado de la busqueda y si no, añade un valor a classFavourite y pinta el array en el innerHTML/el bucle funciona igual que en renderSeries/ escucho para eliminar las series*/
 function renderSeriesFav() {
   let classFavourite = "";
 
@@ -133,26 +132,31 @@ function renderSeriesFav() {
         oneResult.images.jpg.image_url ===
         "https://cdn.myanimelist.net/img/sp/icon/apple-touch-icon-256.png"
       ) {
-        html += `<img
+        html += `<input  class="buttonFav js-buttonFav" type="button" value="X" id=${oneResult.mal_id}>
+        <img
         class="${classFavourite} liSeriesFav__img"
         src='
         https://via.placeholder.com/210x295/ffffff/666666/?text=TV'
         alt='image notfound'
             />`;
       } else {
-        html += `<img
+        html += `<input class="buttonFav js-buttonFav" type="button" value="X" id=${oneResult.mal_id}>
+        <img
+        
         class="${classFavourite} liSeriesFav__img"
         src=${oneResult.images.jpg.image_url}
         alt=${oneResult.title}
           />`;
       }
 
-      html += `<h3 class="${classFavourite} liSeriesFav__title">${oneResult.title}</h3>`;
+      html += `<h3 class="${classFavourite} liSeriesFav__title">${oneResult.title} </h3>`;
+
       html += `</li>`;
     }
     html += `</ul>`;
     html += "</div>";
     listSerieFav.innerHTML += html;
+    listenerButtonFav();
   }
 }
 /*6 getFavLocalStorage
@@ -170,12 +174,44 @@ function getFavLocalStorage() {
 }
 getFavLocalStorage();
 
-/*7 Al pulsar buttonReset eliminamos la variable creada en el local storage/vaciamos nuestro array de series favorita/y pintamos de nuevo para que se apliquen los cambios*/
+/*7 handleClickReset
+Al pulsar buttonReset eliminamos la variable creada en el local storage/vaciamos nuestro array de series favorita/y pintamos de nuevo para que se apliquen los cambios*/
 function handleClickReset(ev) {
   ev.preventDefault();
   localStorage.removeItem("localFavList2");
   favouriteSeries = [];
   renderSeriesFav();
+}
+/*8 listenerButtonFav
+Ponemos a todos los <input type=button> la misma clase para seleccionarlos/  querySelectorAll me devuelv un array/ recorremos ese array con un bucle/ añadimos un evento escuchador a cada uno
+*/
+function listenerButtonFav() {
+  const buttonFav = document.querySelectorAll(".js-buttonFav");
+  for (const eachButton of buttonFav) {
+    eachButton.addEventListener("click", handleButtonFav);
+  }
+}
+
+/*9 handleButtonFav
+Al pulsar buttonFav sacamos del Array de favoritos el elemento cuyo Id coincida/ modificamos el local storage con "setItem"/volvemos a pintar nuestros dos listados con las actualizaciones
+ */
+function handleButtonFav(ev) {
+  ev.preventDefault();
+  const idSelected = parseInt(ev.currentTarget.id);
+  // (findIndex) me devuelve la posicion del elemento
+  const favouriteFound = favouriteSeries.findIndex(
+    (fav) => fav.mal_id === idSelected
+  );
+  console.log(favouriteFound);
+
+  if (favouriteFound >= 0) {
+    favouriteSeries.splice(favouriteFound, 1);
+    console.log(favouriteSeries);
+
+    localStorage.setItem("localFavList2", JSON.stringify(favouriteSeries));
+    renderSeries();
+    renderSeriesFav();
+  }
 }
 
 //EVENTOS
