@@ -8,6 +8,8 @@ const listSerieFav = document.querySelector(".js-favList");
 
 const buttonReset = document.querySelector(".js-buttonReset");
 
+const newButton = document.querySelector(".js-buttonNewFunction");
+
 let animeSeriesList = [];
 let favouriteSeries = [];
 
@@ -65,6 +67,7 @@ function renderSeries() {
         />`;
     }
     html += `<h3 class="liSeries__title">${oneResult.title}</h3>`;
+    html += `<p>${oneResult.type}</p>`;
     html += `</li>`;
     listSerie.innerHTML = html;
     listenerSeries();
@@ -104,7 +107,6 @@ function handleClickFav(ev) {
     renderSeries();
   } else {
     favouriteSeries.splice(favouriteFound, 1);
-
     renderSeriesFav();
     renderSeries();
   }
@@ -112,7 +114,7 @@ function handleClickFav(ev) {
   localStorage.setItem("localFavList2", JSON.stringify(favouriteSeries));
 }
 /* 5 renderSeriesFav
-Cuando .favouriteSeries. esta vacio solo vemos el resultado de la busqueda y si no, añade un valor a classFavourite y pinta el array en el innerHTML/el bucle funciona igual que en renderSeries/ escucho para eliminar las series*/
+Cuando .favouriteSeries. esta vacio solo vemos el resultado de la busqueda y si no, añade un valor a classFavourite y pinta el array en el innerHTML/el bucle funciona igual que en renderSeries/ escucho buttonFav para eliminar las series*/
 function renderSeriesFav() {
   let classFavourite = "";
 
@@ -223,3 +225,11 @@ buttonSearch.addEventListener("click", (ev) => {
 
 //2 Al esuchar el 'click' en el boton de reset ejecutamos la funcion manejadora
 buttonReset.addEventListener("click", handleClickReset);
+
+newButton.addEventListener("click", (ev) => {
+  ev.preventDefault();
+  console.log("Soy newButton");
+  for (const favSerie of favouriteSeries) {
+    console.log(`${favSerie.title}`);
+  }
+});
